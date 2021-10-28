@@ -1,13 +1,3 @@
-/*
- ============================================================================
- Name        : Puissance_4.c
- Author      : 
- Version     :
- Copyright   : Cyrian SAVARY & Maxime STAJSZCZYK
- Description : Puissance 4 game
- ============================================================================
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,6 +5,7 @@
 #include <ctype.h>
 #include <time.h>
 
+<<<<<<< Updated upstream
 #define NBL 7
 #define NBC 6
 #define KNRM  "\x1B[0m"
@@ -396,6 +387,7 @@ char VictoryDiaUp (int c, int l)
 
 	void Scoreboard(void)
 	{
+		printf("|---------------------------------------|\n""|               Scoreboard              |\n""|                                       |\n""|                                       |\n""|      Nombre de partie(s) gagnée(s)    |\n""|                                       |\n""|- Joueur 1 : %d                          |\n""|- Joueur 2 : %d                         |\n""|                                       |\n""|                                       |\n""|---------------------------------------|\n",NbWin[0],NbWin[1]);
 		printf("\nJoueur 1 a gagner %d", NbWin[0]);
         printf("\nJoueur 2 a gagner %d", NbWin[1]);
 
@@ -411,3 +403,10 @@ void delay(int number_of_seconds)
     // looping till required time is not achieved
     while (clock() < start_time + milli_seconds);
 }
+
+
+
+	
+
+
+
