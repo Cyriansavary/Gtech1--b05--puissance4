@@ -36,6 +36,7 @@ char VictoryDiaDown (int c, int l);
 char PlayeableGame(void);
 void Title(void);
 int TestGameFull(void);
+int PlayerWin(void);
 	
 char CaseTable[NBC][NBL];
 
@@ -365,3 +366,50 @@ char VictoryDiaUp (int c, int l)
 
 	  
   }
+
+int GamePlayed = 0;
+int EndGame = 1;
+int Nb = 0;
+
+int main (void){
+    
+    PlayerWin();
+
+}
+    
+    int PlayerWin (void){
+        int P = 0;
+        int Player[2];
+        int NbWin[2];
+        memset (NbWin, 0, sizeof(NbWin));
+        Player[P]= 'W';
+
+        while (GamePlayed < 3){
+
+
+            if (EndGame = 1) {
+                EndGame = 0;
+                
+                if (Player[P] == 'W'){
+                    printf("Le joueur %d a gagne !\n", P +1);
+                    NbWin[P] ++;
+                GamePlayed ++;
+                }
+            }
+        }
+        printf ("Nombre de partie(s) jouee(s) : %d", GamePlayed);
+        printf("\n %d", NbWin[0]);
+        printf("\n %d", NbWin[1]);
+        if (NbWin[0] > NbWin[1])
+        { 
+
+            printf("\n Le joueur 1 a gagne !");
+
+        }
+
+        else{
+
+            printf("\n Le joueur 2 a gagne !");
+
+        }
+    }
