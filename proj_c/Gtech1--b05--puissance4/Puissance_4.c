@@ -1,3 +1,13 @@
+/*
+ ============================================================================
+ Name        : Puissance_4.c
+ Author      : 
+ Version     :
+ Copyright   : Cyrian SAVARY & Maxime STAJSZCZYK
+ Description : Puissance 4 game
+ ============================================================================
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,7 +15,6 @@
 #include <ctype.h>
 #include <time.h>
 
-<<<<<<< Updated upstream
 #define NBL 7
 #define NBC 6
 #define KNRM  "\x1B[0m"
@@ -40,32 +49,30 @@ char CaseTable[NBC][NBL];
 int main(void) {
 	char PlayerWin = '.';
 	char Input;
-	 memset (NbWin, 0, sizeof(NbWin));
+	memset (NbWin, 0, sizeof(NbWin));
 	Title();										// Title of the game	
 	while (1)
 	{
-	memset(CaseTable, '.', sizeof(CaseTable));		//Init Casetable
-	system("@cls||clear");							//clear terminal
-	Input='.';
-	printf(" v");
-	ScreenGame(CaseTable);							//Make Game screen
-	PlayerWin = PlayeableGame();					// Main Game 
-
-	
-	if (PlayerWin =='O' || PlayerWin == 'X' || PlayerWin == 'E') //test if game is end 
-	{
-		PlayerWinScreen(PlayerWin);								// screen of the end 
-		Scoreboard();											//Scoreboard of the game
-		printf("\nVoulez-vous rejouer ?\n");
-		scanf(" %s",&Input);
-		Input=tolower(Input);
-		if (Input != 'y')	
+		memset(CaseTable, '.', sizeof(CaseTable));		//Init Casetable
+		system("@cls||clear");							//clear terminal
+		Input='.';
+		printf(" v");
+		ScreenGame(CaseTable);							//Make Game screen
+		PlayerWin = PlayeableGame();					// Main Game 
+		if (PlayerWin =='O' || PlayerWin == 'X' || PlayerWin == 'E') //test if game is end 
 		{
-			printf("\nAurevoir !");
-			delay(5);
-			break;
+			PlayerWinScreen(PlayerWin);								// screen of the end 
+			Scoreboard();											//Scoreboard of the game
+			printf("\nVoulez-vous rejouer ?\n");
+			scanf(" %s",&Input);
+			Input=tolower(Input);
+			if (Input != 'y')	
+			{
+				printf("\nAurevoir !");
+				delay(5);
+				break;
+			}
 		}
-	}
 	}
 	return EXIT_SUCCESS;
 }
@@ -82,10 +89,10 @@ void Title(void)
 
 void ScreenGame (char GameTable[NBC][NBL])
 {
-
 	for (int L=0; L < NBL; L++){
 		printf("\n");
 		for (int C=0; C < NBC; C++){
+			//printf("%d%d",C,L);
 			if (GameTable[C][L] == 'X')
 			{
 				printf("%s %c ",KRED,GameTable[C][L]);
@@ -109,7 +116,6 @@ int Cursorplayer(int Cursor)
 	int InputUser;
 	char CursorPlayer[NBC];
 	memset(CursorPlayer, ' ', sizeof(CursorPlayer));
-
 	for (int Column = 1; Column < NBC; Column++)
 	{
 		printf(" %c ", CursorPlayer[Column]);
@@ -137,7 +143,6 @@ int Cursorplayer(int Cursor)
 		}			
  	}
  	system("@cls||clear");
- 
 	if (Cursor < 0)
 	{
 		Cursor=0;
@@ -167,28 +172,26 @@ int Cursorplayer(int Cursor)
 	Cursorplayer(Cursor);
 }
 
-
 void PlaceToken(int TokenPlayer)
-  {
-	  	int Test = 0;
-		int PosCursor = 0;
-	  	int PlayerChoice;
-		char Token[2]= {'X','O'};
-	  PlayerChoice=Cursorplayer(PosCursor);
+{
+	int Test = 0;
+	int PosCursor = 0;
+	int PlayerChoice;
+	char Token[2]= {'X','O'};
+	PlayerChoice=Cursorplayer(PosCursor);
 	Test=0;
 	do 
 	{
-	Test++;
+		Test++;
 	}
 	while (CaseTable[PlayerChoice][Test] == '.'  && Test < 6);
 	if (CaseTable[PlayerChoice][Test]=='O' || CaseTable[PlayerChoice][Test]=='X' )
 	{
 		Test--;
 	}
-
 	CaseTable[PlayerChoice][Test]= Token[TokenPlayer];
 	ScreenGame(CaseTable);
-  }
+}
 
 char VictoryHon (int c, int l)
   {
@@ -204,10 +207,8 @@ char VictoryHon (int c, int l)
 		l--;
 		return VictoryHon(c,l);
 	}
-	//printf("\n   %d %d %d",TokenWin,c ,l );
 	if (TokenWin >= 4)
 	{	
-		//printf(" WIN ");
 		return CaseTable[c][l];
 	}
 	return 0;
@@ -226,10 +227,8 @@ char VictoryVer (int c, int l)
 		c++;
 		return VictoryVer(c,l);
 	}
-	//printf("\n   %d %d %d",TokenWin,c ,l );
 	if (TokenWin >= 4)
 	{	
-		//printf(" WIN ");
 		return CaseTable[c][l];
 	}
 	return 0; 
@@ -237,18 +236,19 @@ char VictoryVer (int c, int l)
 
 char VictoryDiaUp (int c, int l)
   {
-	  int TokenWin = 1;
-
+	int TokenWin = 1;
 	while ((CaseTable[c][l]==CaseTable[c+1][l-1]) && (CaseTable[c][l]!='.'))
 	{
 		l--;
 		c++;
-		TokenWin++;						
+		TokenWin++;	
+			if (l<= 0)
+		{
+			l=0;
+		}						
 	}
-	//printf("\n   %d %d %d",TokenWin,c ,l );
 	if (TokenWin >= 4)
 	{	
-		//printf(" WINdiaup ");
 		return CaseTable[c][l];
 	}
 	return 0; 
@@ -261,46 +261,46 @@ char VictoryDiaUp (int c, int l)
 	{
 		l--;
 		c--;
-		TokenWin++;						
+		TokenWin++;
+						
 	}
-	//printf("\n   %d %d %d",TokenWin,c ,l );
 	if (TokenWin >= 4)
 	{	
-		//printf(" WINdiadown ");
 		return CaseTable[c][l];
 	}
 	return 0; 
   }
-  char PlayeableGame(void)
-  {
+char PlayeableGame(void)
+{
 	int TokenPlayer =0;
 	char test;
 	int Gamefull;
-	  while (test!='O' && test !='X')
+	while (test!='O' && test !='X')
 	{
-			if (TokenPlayer==0)
-			{
-				TokenPlayer++;
-			}
-			else
-			{
-				TokenPlayer=0;
-			}
-			Gamefull=TestGameFull();
-			if (Gamefull == 0)
-			{
-				test = 'E';
-				return test;
-			}
-			PlaceToken(TokenPlayer);
-			for (int c = 0; c < NBC; c++)
-			{
+		if (TokenPlayer==0)
+		{
+			TokenPlayer++;
+		}
+		else
+		{
+			TokenPlayer=0;
+		}
+		Gamefull=TestGameFull();
+		if (Gamefull == 0)
+		{
+			test = 'E';
+			return test;
+		}
+		PlaceToken(TokenPlayer);
+		for (int c = 0; c < NBC; c++)
+		{
 			test = VictoryHon(c,6);
-			if (test=='O' || test =='X'){
+			if (test=='O' || test =='X')
+			{
 				return test;
 			}
-			}
-			if (test!='O' && test !='X')
+		}
+		if (test!='O' && test !='X')
 			{
 					for (int l = 0; l < NBL; l++)
 			{
@@ -334,39 +334,33 @@ char VictoryDiaUp (int c, int l)
 										
 			test = VictoryDiaDown(c,l);
 			
-			if (test=='O' || test =='X'){
+			if (test=='O' || test =='X')
+			{
 				return test;
 			}
 			}
 			}
-			}
-			
-				
+			}			
 	}
   }
-  int TestGameFull(void)
-  {
-		  for (int c = 0; c < NBC; c++)
-		  {
-			  for (int l = 0; l < NBL; l++)
-			  {
-				  if(CaseTable[c][l]=='.')
-				  {
-					  return 1;
-				  }
-			  }
-			  
-		  }
-		  return 0;
-
-	  
-  }
-
-    int PlayerWinScreen (char Player)
+int TestGameFull(void)
+{
+	for (int c = 0; c < NBC; c++)
 	{
-        
-      
+		for (int l = 0; l < NBL; l++)
+		{
+			if(CaseTable[c][l]=='.')
+			{
+				return 1;
+			}
+		}
+			  
+	}
+	return 0;
+}
 
+int PlayerWinScreen (char Player)
+	{
                 switch (Player)
 				{
 				case 'O' :
@@ -385,13 +379,12 @@ char VictoryDiaUp (int c, int l)
 				return 0;
 	}
 
-	void Scoreboard(void)
+void Scoreboard(void)
 	{
-		printf("|---------------------------------------|\n""|               Scoreboard              |\n""|                                       |\n""|                                       |\n""|      Nombre de partie(s) gagnée(s)    |\n""|                                       |\n""|- Joueur 1 : %d                          |\n""|- Joueur 2 : %d                         |\n""|                                       |\n""|                                       |\n""|---------------------------------------|\n",NbWin[0],NbWin[1]);
-		printf("\nJoueur 1 a gagner %d", NbWin[0]);
-        printf("\nJoueur 2 a gagner %d", NbWin[1]);
+		printf("|---------------------------------------|\n""|               Scoreboard              |\n""|                                       |\n""|                                       |\n""|      Nombre de partie(s) gagnee(s)    |\n""|                                       |\n""|- Joueur 1 :%27d|\n""|- Joueur 2 :%27d|\n""|                                       |\n""|                                       |\n""|---------------------------------------|\n",NbWin[0],NbWin[1]);
 
 	}
+
 void delay(int number_of_seconds)
 {
     // Converting time into milli_seconds
@@ -402,11 +395,4 @@ void delay(int number_of_seconds)
   
     // looping till required time is not achieved
     while (clock() < start_time + milli_seconds);
-}
-
-
-
-	
-
-
-
+}	
