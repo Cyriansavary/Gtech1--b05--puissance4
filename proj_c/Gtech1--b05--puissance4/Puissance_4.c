@@ -78,7 +78,7 @@ int main(void) {
 }
 
 
-void Title(void)
+void Title(void) //Show the tilte of the game.
 {
 	char Input; 
 	printf(".---.        _                                          .-. \n: .; :      :_;                                        .'.' \n:  _.'.-..-..-. .--.  .--.  .--.  ,-.,-. .--.  .--.   .'.'_ \n: :   : :; :: :`._-.'`._-.'' .; ; : ,. :'  ..'' '_.'  :_ ` :\n:_;   `.__.':_;`.__.'`.__.'`.__,_;:_;:_;`.__.'`.__.'    :_: \n");
@@ -87,12 +87,12 @@ void Title(void)
 	system("@cls||clear");
 }
 
-void ScreenGame (char GameTable[NBC][NBL])
+void ScreenGame (char GameTable[NBC][NBL]) //Initialisation of the game.
 {
 	for (int L=0; L < NBL; L++){
 		printf("\n");
 		for (int C=0; C < NBC; C++){
-			//printf("%d%d",C,L);
+			//printf("%d%d",C,L); 	Seeing all lines numbers for debuging.
 			if (GameTable[C][L] == 'X')
 			{
 				printf("%s %c ",KRED,GameTable[C][L]);
@@ -111,7 +111,7 @@ void ScreenGame (char GameTable[NBC][NBL])
 }
 
 
-int Cursorplayer(int Cursor)
+int Cursorplayer(int Cursor) //Create a cursor to give viewing choice to the player.
 {
 	int InputUser;
 	char CursorPlayer[NBC];
@@ -127,7 +127,7 @@ int Cursorplayer(int Cursor)
 		{
 			InputUser=getch();
 		}
-		if (InputUser==80)	//Down for exit 
+		if (InputUser==80) 
 		{ 
 			break;
 		}
@@ -172,7 +172,7 @@ int Cursorplayer(int Cursor)
 	Cursorplayer(Cursor);
 }
 
-void PlaceToken(int TokenPlayer)
+void PlaceToken(int TokenPlayer) //Place a 'O' on the board for the first player or a 'X' if it's the second player.
 {
 	int Test = 0;
 	int PosCursor = 0;
@@ -193,7 +193,7 @@ void PlaceToken(int TokenPlayer)
 	ScreenGame(CaseTable);
 }
 
-char VictoryHon (int c, int l)
+char VictoryHon (int c, int l) //Looking if there is a possible win in horizontal way on the board.
   {
 	 	  int TokenWin = 1;
 
@@ -213,7 +213,7 @@ char VictoryHon (int c, int l)
 	}
 	return 0;
   }
-char VictoryVer (int c, int l)
+char VictoryVer (int c, int l) //Looking if there is a possible win in vertical way on the board.
   {
 	  int TokenWin = 1;
 
@@ -234,7 +234,7 @@ char VictoryVer (int c, int l)
 	return 0; 
   }
 
-char VictoryDiaUp (int c, int l)
+char VictoryDiaUp (int c, int l) //Looking if there is a possible win in diagonal from bottom left to top right on the board.
   {
 	int TokenWin = 1;
 	while ((CaseTable[c][l]==CaseTable[c+1][l-1]) && (CaseTable[c][l]!='.'))
@@ -253,7 +253,7 @@ char VictoryDiaUp (int c, int l)
 	}
 	return 0; 
   }
-  char VictoryDiaDown (int c, int l)
+  char VictoryDiaDown (int c, int l) //Looking if there is a possible win in diagonal from bottom right to top left on the board.
   {
 	  int TokenWin = 1;
 
@@ -270,7 +270,7 @@ char VictoryDiaUp (int c, int l)
 	}
 	return 0; 
   }
-char PlayeableGame(void)
+char PlayeableGame(void) //The entire game.
 {
 	int TokenPlayer =0;
 	char test;
@@ -343,7 +343,7 @@ char PlayeableGame(void)
 			}			
 	}
   }
-int TestGameFull(void)
+int TestGameFull(void) //Testing if the game board is full.
 {
 	for (int c = 0; c < NBC; c++)
 	{
@@ -359,7 +359,7 @@ int TestGameFull(void)
 	return 0;
 }
 
-int PlayerWinScreen (char Player)
+int PlayerWinScreen (char Player) //Showing which player won the game.
 	{
                 switch (Player)
 				{
@@ -379,7 +379,7 @@ int PlayerWinScreen (char Player)
 				return 0;
 	}
 
-void Scoreboard(void)
+void Scoreboard(void) //Showing a scoreboard of the two players wins. 
 	{
 		printf("|---------------------------------------|\n""|               Scoreboard              |\n""|                                       |\n""|                                       |\n""|      Nombre de partie(s) gagnee(s)    |\n""|                                       |\n""|- Joueur 1 :%27d|\n""|- Joueur 2 :%27d|\n""|                                       |\n""|                                       |\n""|---------------------------------------|\n",NbWin[0],NbWin[1]);
 
